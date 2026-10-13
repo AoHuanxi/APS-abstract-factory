@@ -1,6 +1,9 @@
 
 
-class SQLServerFactory implements DBFactory {
+public class SQLServerFactory implements DBFactory {
+
+    private final SQLServerConnection connection =
+        new SQLServerConnection();
 
     @Override
     public DBConnection createConnection() {
@@ -9,6 +12,6 @@ class SQLServerFactory implements DBFactory {
 
     @Override
     public DBRepository createRepository() {
-        return new SQLServerRepository();
+        return new SQLServerRepository(connection);
     }
 }

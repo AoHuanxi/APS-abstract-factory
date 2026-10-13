@@ -1,4 +1,7 @@
-class PostgreSQLFactory implements DBFactory {
+public class PostgreSQLFactory implements DBFactory {
+
+    private final PostgreSQLConnection connection =
+        new PostgreSQLConnection();
 
     @Override
     public DBConnection createConnection() {
@@ -7,6 +10,6 @@ class PostgreSQLFactory implements DBFactory {
 
     @Override
     public DBRepository createRepository() {
-        return new PostgreSQLRepository();
+        return new PostgreSQLRepository(connection);
     }
 }

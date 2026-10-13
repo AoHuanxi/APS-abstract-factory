@@ -1,20 +1,28 @@
+import java.sql.SQLException;
+
 public class Main {
     public static void main(String[] args) {
         DBFactory factory = new PostgreSQLFactory();
-        // DBFactory factory = new SQLServerFactory();
 
         DBConnection connection = factory.createConnection();
         DBRepository repository = factory.createRepository();
 
-        connection.connect();
-
         try {
-            repository.save("Ana");
+            int id = repository.save("Ana");
+            System.out.println("Usuário cadastrado: " + id);
 
-            Object user = repository.findById(1);
-            System.out.println("Usuário encontrado: " + user);
+            String name = repository.findById(id);
+            System.out.println("Nome encontrado: " + name);
+        } catch (SQLException e) {
+            System.err.println("Erro no banco: " + e.getMessage());
         } finally {
-            connection.disconnect();
+            try {
+                connection.disconnect();
+            } catch (SQLException e) {
+                System.err.println(
+                    "Erro ao encerrar conexão: " + e.getMessage()
+                );
+            }
         }
     }
 }

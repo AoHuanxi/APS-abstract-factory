@@ -1,4 +1,6 @@
-interface DBRepository {
-    void save(Object data);
-    Object findById(int id);
+import java.sql.SQLException;
+
+public interface DBRepository {
+    int save(String name) throws SQLException;
+    String findById(int id) throws SQLException;
 }

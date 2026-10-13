@@ -1,6 +1,7 @@
+import java.sql.Connection;
+import java.sql.SQLException;
 
-
-interface DBConnection {
-    void connect();
-    void disconnect();
+public interface DBConnection {
+    Connection connect() throws SQLException;
+    void disconnect() throws SQLException;
 }
